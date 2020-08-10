@@ -75,7 +75,7 @@ for l in layer:
     callback.nfi = nfi
     try:
         # optimize
-        xopt,f,d = lbfgsb(nfi.f, nfi.flat_param, nfi.fprime, m=500, callback=callback, factr=1e0,pgtol=1e-16,maxiter=maxiter,iprint=50)
+        xopt, f, d = lbfgsb(nfi.f, nfi.flat_param, nfi.fprime, m=500, callback=callback, factr=1e0, pgtol=1e-16, maxiter=maxiter, iprint=50)
     except RuntimeError as Argument:
         with callback.open() as output:
             print(Argument, file=output) # if overflow then just print and continue
@@ -83,6 +83,5 @@ for l in layer:
         # save parameters
         nfi.flat_param = xopt
         callback.save(xopt, 'final') 
-
 #%%
 

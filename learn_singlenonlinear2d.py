@@ -40,7 +40,7 @@ namestobeupdate, callback, nonlinpdelearner = nonlinpdeconfig.setenv(options)
 globals().update(namestobeupdate)
 
 #%% training
-trans = torchvision.transforms.Compose([pdedata.DownSample(5,'Dirichlet'), pdedata.ToTensor(), pdedata.ToPrecision(precision), pdedata.AddNoise(start_noise_level, end_noise_level)])
+trans = torchvision.transforms.Compose([pdedata.DownSample(5, 'Dirichlet'), pdedata.ToTensor(), pdedata.ToPrecision(precision), pdedata.AddNoise(start_noise_level, end_noise_level)])
 for l in layer:
     if l == 0:
         callback.stage = 'warmup'
