@@ -52,10 +52,12 @@ for l in layer:
     step = (l if l>=1 else 1)
     # generate layer-l data
     d = pdedata.variantcoelinear2d(step*dt, mesh_size=mesh_size*5, initfreq=initfreq, variant_coe_magnitude=variant_coe_magnitude, transform=trans)
-    dataloader = torch.utils.data.DataLoader(d, batch_size=batch_size,num_workers=1)
+    dataloader = torch.utils.data.DataLoader(d, batch_size=batch_size, num_workers=1)
     dataloader = iter(dataloader)
     sample = pdedata.ToVariable()(pdedata.ToDevice(gpu)(next(dataloader)))
     del dataloader
+    print(sample['x'].shape, sample['y'].shape, sample['u0'].shape)
+    exit()
     xy = torch.stack([sample['x'],sample['y']], dim=3)
     linpdelearner.xy = xy # set xy for pde-net
     # set NumpyFunctionInterface
